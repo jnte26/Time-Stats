@@ -9,42 +9,46 @@
         body { font-family: "Microsoft JhengHei", "PingFang TC", sans-serif; background: #f0f2f5; margin: 0; padding: 15px; color: var(--text); }
         .container { max-width: 950px; margin: 0 auto; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
         h2 { text-align: center; color: var(--blue); margin-top: 0; font-size: 24px; }
-        p.subtitle { text-align: center; color: #70757a; margin-top: -20px; margin-bottom: 30px; }
+        p.subtitle { text-align: center; color: #70757a; margin-top: -10px; margin-bottom: 25px; }
 
         /* 姓名輸入 */
-        .input-box { width: 100%; padding: 15px; border: 2px solid #dadce0; border-radius: 8px; font-size: 16px; margin-bottom: 20px; box-sizing: border-box; transition: 0.3s; }
-        .input-box:focus { border-color: var(--blue); outline: none; box-shadow: 0 0 0 3px rgba(26,115,232,0.1); }
+        .input-box { width: 100%; padding: 15px; border: 2px solid #dadce0; border-radius: 8px; font-size: 16px; margin-bottom: 20px; box-sizing: border-box; }
         
-        /* 模式切換器 */
-        .mode-selector { background: #e8f0fe; padding: 15px; border-radius: 10px; margin-bottom: 25px; text-align: center; border: 1px solid #d2e3fc; }
-        .mode-selector span { font-weight: bold; margin-right: 15px; color: var(--blue); }
-        .mode-selector label { margin: 0 12px; cursor: pointer; font-size: 15px; display: inline-flex; align-items: center; }
-        .mode-selector input { margin-right: 6px; width: 18px; height: 18px; }
+        /* 💡 模式切換按鈕區塊 - 加強版樣式 */
+        .mode-selector { 
+            background: #ffffff; 
+            padding: 20px; 
+            border-radius: 10px; 
+            margin-bottom: 25px; 
+            text-align: center; 
+            border: 2px dashed var(--blue); /* 虛線框讓它更明顯 */
+        }
+        .mode-title { font-weight: bold; margin-bottom: 10px; display: block; color: var(--blue); }
+        .mode-options { display: flex; justify-content: center; gap: 30px; }
+        .mode-label { cursor: pointer; font-size: 16px; display: flex; align-items: center; font-weight: bold; }
+        .mode-label input { width: 20px; height: 20px; margin-right: 8px; cursor: pointer; }
 
-        /* 填寫區行事曆網格 */
+        /* 行事曆網格 */
         .calendar-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 30px; }
         .day-header { text-align: center; font-weight: bold; padding: 10px; background: #f1f3f4; border-radius: 6px; font-size: 14px; }
-        .day-box { border: 1px solid #dadce0; padding: 12px; border-radius: 10px; text-align: center; background: #fff; transition: 0.2s; }
-        .day-box:hover { border-color: var(--blue); background: #f8faff; }
+        .day-box { border: 1px solid #dadce0; padding: 12px; border-radius: 10px; text-align: center; background: #fff; }
         .date-label { font-weight: bold; color: var(--blue); display: block; margin-bottom: 8px; border-bottom: 1px dotted #dadce0; padding-bottom: 5px; }
-        .slot-check { font-size: 14px; display: flex; align-items: center; justify-content: center; margin: 8px 0; cursor: pointer; color: #5f6368; }
+        .slot-check { font-size: 14px; display: flex; align-items: center; justify-content: center; margin: 8px 0; cursor: pointer; }
         .slot-check input { margin-right: 8px; width: 16px; height: 16px; }
 
         /* 按鈕 */
         .btn { width: 100%; padding: 18px; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.2s; }
         .btn-submit { background: var(--green); color: white; }
-        .btn-submit:hover { background: #2d8a46; box-shadow: 0 2px 8px rgba(52,168,83,0.3); }
 
         /* 統計結果區 */
-        #result-section { display: none; margin-top: 10px; }
+        #result-section { display: none; }
         .result-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; margin-top: 25px; }
-        .result-card { background: #fff; padding: 15px; border-radius: 12px; border: 1px solid #dadce0; border-top: 5px solid var(--blue); box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
-        .result-date { font-weight: bold; font-size: 16px; color: #202124; text-align: center; margin-bottom: 12px; }
+        .result-card { background: #fff; padding: 15px; border-radius: 12px; border: 1px solid #dadce0; border-top: 5px solid var(--blue); }
+        .result-date { font-weight: bold; font-size: 16px; text-align: center; margin-bottom: 12px; }
         .time-slot { margin-top: 10px; border-top: 1px solid #f1f3f4; padding-top: 8px; }
-        .time-label { font-size: 12px; font-weight: bold; color: #70757a; display: block; margin-bottom: 5px; }
+        .time-label { font-size: 12px; font-weight: bold; color: #70757a; display: block; }
         .badge { background: #e8f0fe; color: #1967d2; border: 1px solid #d2e3fc; padding: 3px 8px; border-radius: 12px; margin: 2px; display: inline-block; font-size: 12px; }
-        .empty-text { color: #bdc1c6; font-size: 12px; font-style: italic; }
-
+        
         @media (max-width: 700px) { .calendar-grid { grid-template-columns: repeat(2, 1fr); } }
     </style>
 </head>
@@ -53,28 +57,31 @@
 <div class="container">
     <div id="form-ui">
         <h2>📅 2026年4月聚餐調查</h2>
-        <p class="subtitle">請勾選您可以出席的時間 (排除假日)</p>
+        <p class="subtitle">填寫完畢後，即可查看目前即時彙整的名單</p>
         
-        <input type="text" id="userName" class="input-box" placeholder="請填寫您的稱呼 / 姓名" required>
+        <input type="text" id="userName" class="input-box" placeholder="請填寫您的姓名 (必填)">
         
         <div class="mode-selector">
-            <span>快速模式：</span>
-            <label><input type="radio" name="mode" checked onclick="toggleDefault(true)"> 預設全部「可以」</label>
-            <label><input type="radio" name="mode" onclick="toggleDefault(false)"> 預設全部「不行」</label>
+            <span class="mode-title">快速勾選模式</span>
+            <div class="mode-options">
+                <label class="mode-label">
+                    <input type="radio" name="quickMode" checked onclick="toggleDefault(true)"> 預設全部「可以」
+                </label>
+                <label class="mode-label">
+                    <input type="radio" name="quickMode" onclick="toggleDefault(false)"> 預設全部「不行」
+                </label>
+            </div>
         </div>
 
         <div class="calendar-grid" id="cal-input">
-            <div class="day-header">週一</div><div class="day-header">週二</div>
-            <div class="day-header">週三</div><div class="day-header">週四</div>
-            <div class="day-header">週五</div>
-            </div>
+            <div class="day-header">一</div><div class="day-header">二</div><div class="day-header">三</div><div class="day-header">四</div><div class="day-header">五</div>
+        </div>
         
-        <button class="btn btn-submit" id="submitBtn" onclick="submitAndShow()">送出並查看統計</button>
+        <button class="btn btn-submit" id="submitBtn" onclick="submitAndShow()">送出並查看統計結果</button>
     </div>
 
     <div id="result-section">
         <h2>📊 目前出席統計名單</h2>
-        <p class="subtitle">依日期排序 (含目前無人時段)</p>
         <div id="loading" style="text-align:center; padding: 40px; color:#888;">正在讀取最新資料...</div>
         <div class="result-grid" id="result-display"></div>
         <button class="btn" style="margin-top:40px; background:#5f6368; color:#fff;" onclick="location.reload()">返回 / 重新填寫</button>
@@ -82,14 +89,12 @@
 </div>
 
 <script>
-    // 請替換為您的 Google Apps Script 網址 (確保結尾是 /exec)
+    // ⚠️ 記得換成你的 Apps Script 網址
     const scriptURL = 'https://script.google.com/macros/s/AKfycbz82aW2sP2sFCt1ISUQJ3xk6bve9dTPAUOOz7qtOboho5lPbOa909Rr7FYwwj6A4t_M4A/exec';
 
     function init() {
         const cal = document.getElementById('cal-input');
-        // 2026/4/1 為週三，前面補兩格 (週一、週二)
         for(let i=0; i<2; i++) { cal.appendChild(document.createElement('div')); }
-
         for(let d=1; d<=30; d++) {
             let date = new Date(2026, 3, d);
             if(date.getDay() !== 0 && date.getDay() !== 6) {
@@ -105,6 +110,7 @@
         }
     }
 
+    // 💡 模式切換邏輯
     function toggleDefault(isAvailable) {
         document.querySelectorAll('.slot-cb').forEach(cb => cb.checked = isAvailable);
     }
@@ -119,19 +125,17 @@
             selected.push({ date: cb.getAttribute('data-date'), slot: cb.getAttribute('data-type') });
         });
 
-        if(selected.length === 0) { alert('請至少勾選一個您可以出席的時段！'); return; }
+        if(selected.length === 0) { alert('請至少勾選一個時段！'); return; }
 
         const btn = document.getElementById('submitBtn');
         btn.disabled = true;
-        btn.innerText = '正在存入試算表...';
+        btn.innerText = '正在存入系統...';
 
         try {
             await fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({name, details: selected}) });
-            
             document.getElementById('form-ui').style.display = 'none';
             document.getElementById('result-section').style.display = 'block';
-            
-            setTimeout(fetchResults, 1200); // 給予 Google 試算表存檔反應時間
+            setTimeout(fetchResults, 1200);
         } catch (e) {
             alert('連線失敗，請檢查網路。');
             btn.disabled = false;
@@ -145,7 +149,6 @@
             const display = document.getElementById('result-display');
             document.getElementById('loading').style.display = 'none';
             
-            // 資料分組
             const grouped = {};
             data.forEach(item => {
                 const key = `${item.date}-${item.slot}`;
@@ -154,8 +157,6 @@
             });
 
             display.innerHTML = '';
-
-            // 按照日期順序渲染平日
             for (let d = 1; d <= 30; d++) {
                 let dateObj = new Date(2026, 3, d);
                 if (dateObj.getDay() !== 0 && dateObj.getDay() !== 6) {
@@ -165,25 +166,19 @@
                     
                     const getNamesBadge = (slot) => {
                         const key = `${dateStr}-${slot}`;
-                        return (grouped[key] || []).map(n => `<span class="badge">${n}</span>`).join('') || '<span class="empty-text">無人出席</span>';
+                        return (grouped[key] || []).map(n => `<span class="badge">${n}</span>`).join('') || '<span style="color:#bdc1c6; font-size:11px;">(無人)</span>';
                     };
 
                     card.innerHTML = `
                         <div class="result-date">📅 ${dateStr}</div>
-                        <div class="time-slot">
-                            <span class="time-label">☀️ 中餐</span>
-                            ${getNamesBadge('中餐')}
-                        </div>
-                        <div class="time-slot">
-                            <span class="time-label">🌙 晚餐</span>
-                            ${getNamesBadge('晚餐')}
-                        </div>
+                        <div class="time-slot"><span class="time-label">☀️ 中餐</span>${getNamesBadge('中餐')}</div>
+                        <div class="time-slot"><span class="time-label">🌙 晚餐</span>${getNamesBadge('晚餐')}</div>
                     `;
                     display.appendChild(card);
                 }
             }
         } catch (e) {
-            document.getElementById('loading').innerText = '暫時無法讀取名單，請重新整理網頁。';
+            document.getElementById('loading').innerText = '讀取失敗，請重新整理。';
         }
     }
 
