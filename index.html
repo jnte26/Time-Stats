@@ -104,33 +104,36 @@ async function submitData() {
         return;
     }
 
-    const results = [];
+    const selectedSlots = []; // 改用陣列存放物件
     document.querySelectorAll('.day-cell').forEach(cell => {
-        const date = cell.querySelector('.date-num').innerText;
+        const dateText = cell.querySelector('.date-num').innerText; // 例如 "4 / 1"
         const lunch = cell.querySelector('.lunch').checked;
         const dinner = cell.querySelector('.dinner').checked;
-        if(lunch || dinner) {
-            results.push(`${date}: ${lunch ? '[中]' : ''}${dinner ? '[晚]' : ''}`);
-        }
+        
+        if(lunch) selectedSlots.push({ date: dateText, slot: '中餐' });
+        if(dinner) selectedSlots.push({ date: dateText, slot: '晚餐' });
     });
+
+    if (selectedSlots.length === 0) {
+        alert('請至少勾選一個可出席的時間！');
+        return;
+    }
 
     const postData = {
         name: name,
-        details: results.join(', ')
+        details: selectedSlots // 送出結構化的陣列
     };
 
-    // 替換成你剛剛在 Apps Script 複製的網址
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzwRt1ZGd1vGA9XbJgtCwlrpTiw1DqDqBj9YBDRbrUJser0onCwGt_xZEpF5CQM8bvfUA/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwbpIOpXWBLjbXDT1p8pm4Ulw8QalY2ceNNVBf9v7XyY4I6qsMIZo5JDvdEK1kOJ2YG6w/exec'; // 記得填入你的網址
 
     try {
         const response = await fetch(scriptURL, {
             method: 'POST',
             body: JSON.stringify(postData)
         });
-        alert('提交成功！感謝您的參與。');
+        alert('提交成功！資料已分開存入統計表。');
     } catch (error) {
-        console.error('Error!', error.message);
-        alert('提交失敗，請檢查網路連線。');
+        alert('提交失敗，請檢查網路。');
     }
 }
     initCalendar();
